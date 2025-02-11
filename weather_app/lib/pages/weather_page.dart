@@ -10,7 +10,7 @@ class WeatherPage extends StatefulWidget {
 }
 
 class _WeatherPageState extends State<WeatherPage> {
-  final _weatherService = WeatherService(apiKey);
+  final _weatherService = WeatherService('95a299767089deeefdd225ce4fb5dae4');
   Weather? _weather;
 
   //fetch weather
@@ -32,8 +32,32 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
+  //weather animation
+
+  //init state
+  @override
+  void initState() {
+    super.initState();
+
+    //fetch weather on startup
+    _fetchWeather();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //city name
+            Text(_weather?.cityName ?? "loading city..."),
+
+            //temperature
+            Text('${_weather?.temperature.round()}°C')
+          ],
+        ),
+      ),
+    );
   }
 }
